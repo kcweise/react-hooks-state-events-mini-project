@@ -9,19 +9,29 @@ console.log({ CATEGORIES, TASKS });
 
 function App() {
   //Lifts state from Tasklist
-  const[tasks, setTasks] = useState(TASKS);//set state in APP
+  const[tasks, setTasks] = useState(TASKS);//set state for task list in APP
+  const[selectedCategory, setSelectedCategory] = useState ("All")//set state for category list in App
+  
+  //
+  const handleSelectCategory = (category)=>{
+  setSelectedCategory(category);
+  }
 
-  //passdown function to Tasklist to lift state up to APP
+  //
   const updateTasks = (updatedTasks)=> {setTasks(updatedTasks)}
 
+  //filtered tasks based on click event in CategoryFilter
+  const filteredTasks = selectedCategory === "All"
+  ? tasks : tasks.filter(task=> task.category === selectedCategory)
 
 
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter category = {CATEGORIES} />
+      <CategoryFilter selectedCategory= {selectedCategory} categories = {CATEGORIES}
+       onSelectCategory = {handleSelectCategory} />
       <NewTaskForm />
-      <TaskList tasks = {tasks} updateTasks={updateTasks}/>
+      <TaskList tasks = {filteredTasks} updateTasks={updateTasks}/>
     </div>
   );
 }

@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import Task from "./Task";
 
 function TaskList({tasks, updateTasks}) {
-  const[newTasks, setNewTasks] = useState(tasks)
-
+  
   const deleteTask = (taskText)=>{
-    const updatedTasks = (newTasks.filter(task => task.text !== taskText));
-    setNewTasks(updatedTasks);//update Tasklist state
+    const updatedTasks = (tasks.filter(task => task.text !== taskText));
+   
     updateTasks(updatedTasks);//update parent state
 
   }
@@ -14,7 +13,7 @@ function TaskList({tasks, updateTasks}) {
   
   return (
     <div className="tasks">
-      {newTasks.map(task=>(<Task key ={task.text} text={task.text} category={task.category}
+      {tasks.map(task=>(<Task key ={task.text} text={task.text} category={task.category}
       deleteTask = {deleteTask}/>))}
     </div>
   );

@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <h2>My tasks</h2>
-      <CategoryFilter updateTasks={updateTasks} />
+      <CategoryFilter category = {CATEGORIES} />
       <NewTaskForm />
       <TaskList tasks = {tasks} updateTasks={updateTasks}/>
     </div>
